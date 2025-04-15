@@ -1,0 +1,105 @@
+/* Container */
+.comment-container {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Heading */
+  h2 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+  
+  /* Form */
+  form {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form Labels */
+  .form-label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* Form Inputs */
+  input[type="text"],
+  textarea,
+  input[type="file"] {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 12px;
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #333;
+    transition: border-color 0.3s ease;
+  }
+  
+  input[type="text"]:focus,
+  textarea:focus,
+  input[type="file"]:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+  
+  /* Textarea */
+  textarea {
+    resize: none;
+  }
+  
+  /* Buttons */
+  button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+  }
+  
+  button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Column layout for images */
+  .col-lg-6 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  /* Comment Images */
+  .comment-image {
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 350px;
+    margin-top: 20px;
+  }
+  
+  /* Media Queries for responsiveness */
+  @media (max-width: 768px) {
+    .comment-container {
+      padding: 15px;
+    }
+  
+    .col-lg-6 {
+      width: 100%;
+    }
+  
+    .comment-image {
+      max-width: 100%;
+    }
+  }
+  

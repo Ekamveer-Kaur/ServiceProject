@@ -1,0 +1,13 @@
+.service-box {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 10px 0;
+  }
+  .service-box img {
+    width: 40px;
+    margin-right: 10px;
+  }
+  

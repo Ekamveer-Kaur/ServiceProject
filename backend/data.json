@@ -1,0 +1,132 @@
+[
+    {
+      "name": "Women's Salon",
+      "image": "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_56,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/supply/customer-app-supply/1678864013225-bfc1de.jpeg",
+      "subcategories": [
+        {
+          "name": "Hair Styling",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhAdCZgpMuqJB_NeLKDOSN4bKt0bpp0nwNTQ&s"
+        },
+        {
+          "name": "Facial & Skincare",
+          "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5i-46qh6XnKzGu7KhQ7fMchP9avMpTYN2hA&s"
+        }
+      ]
+    },
+      {
+        "name": "Men's Salon & Massage",
+        "image": "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_56,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1710241114433-5cfa7c.jpeg",
+        "subcategories": [
+          {
+            "name": "Salon for Kids & Men",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6APlJn_Dl-NATiQ-xjLi0QBcPelQOjiAakQ&s"
+          },
+          {
+            "name": "Massage for Men",
+            "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-GxPTt-oRk75LlpJVNNZG2zKQ1kzjNjs-Sw&s"
+          }
+        ]
+      },
+      
+      {
+        "name": "AC and Appliance Repair",
+        "image": "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_56,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/supply/customer-app-supply/1741326936056-c3a39a.jpeg",
+        "subcategories": [
+          {
+            "name": "AC",
+            "image": "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_48,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/supply/customer-app-supply/1741326936056-c3a39a.jpeg"
+          },
+          {
+            "name": "Washing Machine Repair",
+            "image": "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_48,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1721898343827-a6e861.jpeg"
+          }
+        ],
+        "sections":[
+          {
+            "title":"Kitchen Appliances",
+            "items":[
+              {
+                "name":"Water Purifier Repair",
+                "image":"https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_48,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1728900070749-1a4df6.jpeg"
+              },
+              {
+                "name":"Refrigerator Repair",
+                "image":"https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_48,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1728899903214-941d38.jpeg"
+              },
+              {
+                "name":"Microwave Repair",
+                "image":"https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_48,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1722431320453-bd1936.jpeg"
+  
+              },
+              {
+                "name":"Chimney Repair",
+                "image":"https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_48,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1728840381808-4fe952.jpeg"
+              }
+            ]
+          },
+          {
+            "title":"Buy Native Products",
+            "items":[{
+              "name":"Native Water Purifier",
+              "image":"https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_48,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1705340729734-0a23f7.jpeg"
+            },
+            {
+              "name":"Native Smart Locks",
+              "image":"https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_48,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1727098260855-690300.jpeg"
+            }
+          ]
+          }
+        ]
+      },
+  
+  
+      {
+        "name": "Cleaning",
+        "image": "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_56,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/home-screen/1681711961404-75dfec.jpeg",
+        "subcategories": [
+          {
+            "name": "Bathroom and Kitchen Cleaning",
+            "image": "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_56,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1728900638112-d33369.jpeg"
+          },
+          {
+            "name": "Sofa and Carpet Cleaning",
+            "image": "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_56,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1728900640167-18109e.jpeg"
+          }
+        ]
+      },
+      {
+        "name": "Electrician,Plumber and Carpenter",
+        "image": "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_56,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1658402794135-faf080.png",
+        "subcategories": [
+          {
+            "name": "Electrician",
+            "image": "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_48,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1699868754554-a5c5c9.jpeg"
+          },
+          {
+            "name": "Plumber",
+            "image": "https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_48,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1722431282836-ee5db3.jpeg"
+          },
+          {
+            "name":"Carpenter",
+            "image":"https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_48,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1722431287847-8acb8c.jpeg"
+          }
+        ],
+        "sections":[
+          {
+            "title":"Home installation",
+            "items":[
+              {
+                "name":"IKEA Furniture Assembly",
+                "image":"https://res.cloudinary.com/urbanclap/image/upload/t_high_res_category/w_48,dpr_1,fl_progressive:steep,q_auto:low,f_auto,c_limit/images/growth/luminosity/1719382680993-bf3aa3.jpeg"
+              }
+            ]
+      }
+    ]
+        
+  }
+  
+      
+      
+  
+      
+      ]
