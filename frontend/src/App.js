@@ -34,8 +34,11 @@ import UserOrders from "./components/UserOrders";
 import AdminRoute from "./components/AdminRoute";
 import AboutUs from "./components/AboutUs";
 import ContactUs from "./components/ContactUs";
-
-
+import GetAllUser from "./Admin/GetAllUser";
+import Footer from "./components/Footer";
+import ViewSlider from "./components/ViewSlider";
+import GetUserOrderDetails from "./components/GetUserOrderDetails";
+import AdminOrderDetails from "./Admin/AdminOrderDetails";
 // import Services from "./components/Services";
 
 function App() {
@@ -47,6 +50,7 @@ function App() {
         {/* Navbar Layout */}
         <Route path="/" element={<Navbar />}>
           <Route index element={<Home />} />
+          <Route path="" element={<Footer />} />
           <Route path="signup" element={<SignUp />} />
           <Route path="login" element={<Login />} />
           <Route path="/Viewsmallsubcategory/:name/:subcategoryname" element={<Viewsmallsubcategoryinfront/>} />
@@ -55,14 +59,17 @@ function App() {
           <Route path="/fullblog/:id" element={<Readmore/>}/>
           <Route path="/AboutUs" element={<AboutUs/>}/>
           <Route path="/ContactUs" element={<ContactUs/>}/>
+          <Route path="profile" element={<Profile />}/>
+          <Route path="category/:category" element={<ViewSlider />}/>
         </Route>
-
+      
         {/* User Dashboard Layout */}
         <Route path="/UserDashboard" element={<UserLayout />}>
           <Route index element={<UserDashboard />} />
-          <Route path="profile" element={<Profile />}/>
+         
           <Route path="userorders" element={<UserOrders />} />
-          
+          <Route path="getuserorderdetails/:orderId" element={<GetUserOrderDetails />} />
+         
         </Route>
 
         {/* Admin Dashboard Layout */}
@@ -84,7 +91,8 @@ function App() {
           <Route path="updatesmallsubcategory/:categoryid/:subcategoryid/:smallsubid" element={<Updatesmallsubcategory/>}/>
           <Route path="blogs" element={<Blogform/>}/>
           <Route path="viewblogs" element={<Viewblogs/>}/>
-
+          <Route path="getallusers" element={<GetAllUser/>}/>
+          <Route path="adminorderdetails/:orderId" element={<AdminOrderDetails/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

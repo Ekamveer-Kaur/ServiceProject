@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
   role: { type: String, enum: ["user", "admin"], default: "user" },
   profilePic: { type: String, default: "" },
   createdat: { type: Date, default: Date.now }
-});
+}, { timestamps: true });
+
 
 const User = mongoose.model('user', userSchema);
 module.exports = User;

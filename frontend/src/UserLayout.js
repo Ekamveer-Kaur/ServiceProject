@@ -1,8 +1,11 @@
 import React, {  useState, useEffect } from 'react'
 import { Link , Outlet, useNavigate} from 'react-router-dom'
+
+
+
 const UserLayout = () => {
-    const [item,setItem]=useState({})
-    const [pic,setpic]=useState("");
+    const [user,setUser]=useState({})
+    const [pic,setPic]=useState("");
     const navigate=useNavigate();
 
 
@@ -12,112 +15,162 @@ const UserLayout = () => {
         dropdownElements.forEach(dropdown => {
           new window.bootstrap.Dropdown(dropdown);
         });
+    
+        // Get user email from localStorage
+        const email = localStorage.getItem("email");
+        const profile = localStorage.getItem("profile");
+        const name = localStorage.getItem("name");
+
+        if (name) {
+            setUser({ name });  // 👈 This sets name from localStorage for instant rendering
+          }
+        
+        if (email) {
+          getUserProfile(email);
+          if (profile) {
+            setPic(profile);
+          }
+        }
       }, []);
 
-  return (
+      const getUserProfile = async (email) => {
+        try {
+          const res = await fetch("http://localhost:5000/api/get-profile", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email }),
+          });
+    
+          if (res.ok) {
+            const data = await res.json();
+              // Save name and profile pic both
+            setUser({ name: data.name });
+            
+            if (data.profilePic) {
+                setPic(data.profilePic);
+                localStorage.setItem("profile", data.profilePic); // ✅ SAVE profile in localStorage
+              }
+          } else {
+            console.error("User not found or error in fetching");
+          }
+        } catch (error) {
+          console.error("Fetch user error:", error);
+        }
+      };
 
-    <div className="container-fluid">
-    <div class="row flex-nowrap">
-        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
-            <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <span class="fs-5 d-none d-sm-inline">Menu</span>
-                </a>
-                <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
-                    <li class="nav-item">
-                        <Link to=
-                        'enquiries' class="nav-link align-middle px-0">
-                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Home</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-speedometer2"></i> <span class="ms-1 d-none d-sm-inline">Dashboard</span> </a>
-                        <ul class="collapse show nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1 </a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2 </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <Link to="userorders" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-table"></i> <span class="ms-1 d-none d-sm-inline">Orders</span></Link>
-                    </li>
-                    <li>
-                        <a href="#submenu2" data-bs-toggle="collapse" class="nav-link px-0 align-middle ">
-                            <i class="fs-4 bi-bootstrap"></i> <span class="ms-1 d-none d-sm-inline">Bootstrap</span></a>
-                        <ul class="collapse nav flex-column ms-1" id="submenu2" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Item</span> 2</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle">
-                            <i class="fs-4 bi-grid"></i> <span class="ms-1 d-none d-sm-inline">Products</span> </a>
-                            <ul class="collapse nav flex-column ms-1" id="submenu3" data-bs-parent="#menu">
-                            <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 2</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 3</a>
-                            </li>
-                            <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Product</span> 4</a>
-                            </li>
-                        </ul>
-                    </li>
-                   
-
-
-
-
-                </ul>
-                <hr/>
-                <div class="dropdown pb-4">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img 
-    src={pic ? pic : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"} 
-    alt="Profile" 
-    width="30" 
-    height="30" 
-    className="rounded-circle"
-/>
-
-
-                        
-
-
-                        <span class="d-none d-sm-inline mx-1">{item.name}</span>
-                    </a>
-                    
-
-                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                        <li><a class="dropdown-item" href="#">New project...</a></li>
-                        <li><a class="dropdown-item" href="#">Settings</a></li>
-                        <li><Link class="dropdown-item" to="profile">Profile</Link></li>
-                        <li>
-                            <hr class="dropdown-divider"/>
-                        </li>
-                        <li><a class="dropdown-item" href="#" >Sign out</a></li>
-                    </ul>
-                </div>
+      const handleSignOut = () => {
+        // LocalStorage se data remove karna
+        localStorage.removeItem("email");
+        localStorage.removeItem("role");
+        localStorage.removeItem("profile");
+    
+        // User ko login page pe redirect karna
+        navigate("/login");
+      };
+      return (
+        <div className="d-flex">
+          {/* Sidebar */}
+          <div className="sidebar d-flex flex-column p-3 text-white">
+            <div className="text-center mb-4">
+              <img
+                src={
+                  pic ||
+                  'https://cdn-icons-png.flaticon.com/512/3135/3135715.png'
+                }
+                alt="Profile"
+                className="rounded-circle shadow"
+                width="80"
+                height="80"
+              />
+              <h5 className="mt-2">{user.name}</h5>
             </div>
+            <ul className="nav nav-pills flex-column">
+              <li className="nav-item">
+                <Link to="/" className="nav-link text-white">
+                  <i className="bi bi-house-door me-2"></i> Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="userorders" className="nav-link text-white">
+                  <i className="bi bi-bag-check me-2"></i> My Orders
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/viewaddtocart" className="nav-link text-white">
+                  <i className="bi bi-cart me-2"></i> Cart
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/frontblog" className="nav-link text-white">
+                  <i className="bi bi-journals me-2"></i> Blogs
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/profile" className="nav-link text-white">
+                  <i className="bi bi-person me-2"></i> Profile
+                </Link>
+              </li>
+              <li className="nav-item mt-3">
+                <button className="btn btn-outline-light w-100" onClick={handleSignOut}>
+                  <i className="bi bi-box-arrow-right me-2"></i> Sign Out
+                </button>
+              </li>
+            </ul>
+          </div>
+    
+          {/* Main content */}
+          <div className="content p-4" style={{ flex: 1, backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
+            <Outlet />
+          </div>
+    
+          {/* CSS Styles */}
+          <style jsx="true">{`
+            .sidebar {
+              width: 240px;
+              min-height: 100vh;
+              background: linear-gradient(180deg, #3c3b3f, #605c3c);
+              box-shadow: 2px 0 15px rgba(0,0,0,0.1);
+            }
+    
+            .nav-link {
+              font-size: 1rem;
+              padding: 12px;
+              margin: 5px 0;
+              border-radius: 10px;
+              transition: background-color 0.3s ease;
+            }
+    
+            .nav-link:hover {
+              background-color: rgba(255, 255, 255, 0.2);
+            }
+    
+            @media (max-width: 768px) {
+              .sidebar {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-around;
+                padding: 10px 0;
+              }
+    
+              .nav-pills {
+                flex-direction: row;
+                flex-wrap: wrap;
+              }
+    
+              .nav-item {
+                flex: 1 1 45%;
+                text-align: center;
+              }
+    
+              .content {
+                padding: 1rem;
+              }
+            }
+          `}</style>
         </div>
-        <Outlet/>
-        
-    </div>
-</div>
-  )
-}
+      );
+    };
 
 export default UserLayout

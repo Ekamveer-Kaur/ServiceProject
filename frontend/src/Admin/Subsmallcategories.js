@@ -145,7 +145,7 @@ const handleSubmit = async (e) => {
                 >
                   <option value="">Select Category</option>
                   {categories.map((cat) => (
-                    <option key={cat.id} value={cat.name}>
+                    <option key={cat._id} value={cat.name}>
                       {cat.name}
                     </option>
                   ))}
@@ -163,8 +163,10 @@ const handleSubmit = async (e) => {
                   disabled={!selectedCategory}
                 >
                   <option value="">Select Sub-Category</option>
-                  {subCategories.map((sub) => (
-                    <option key={sub.id} value={sub.subcategoryname}>
+                  {Array.isArray(subCategories) &&
+  subCategories.map((sub) => (
+
+                    <option key={sub._id} value={sub.subcategoryname}>
                       {sub.subcategoryname}
                     </option>
                   ))}

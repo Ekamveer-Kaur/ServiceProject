@@ -6,63 +6,30 @@ const Viewsubcategories = () => {
   const navigate = useNavigate(); // ✅ useNavigate ko define kiya
 
   // Handle deletion of a comment
-//   const Deletecategory = async(id) => {
-//     const formdata=JSON.stringify({
-//       id:id
-//     })
-//     try{
-//     const response = await fetch(`http://localhost:5000/api/deleteblog`,
-//        { method: 'POST' ,
-//         headers:{'content-type':'application/json'},
-//         body:formdata
-//        })
-//        if(response.ok){
-//         alert("SubCategory deleted");
-//         setTimeout(()=>{
-// window.location.reload();
-//         },1000);
-//        }
-//        else{
-// alert("error");
-//        }
-//     }
-//     catch(err){
-//       console.log(err);
-//     }
-//   };
-
-
-const Deletecategory = async (id) => {
-  const formdata = JSON.stringify({
-    id: id
-  });
-
-  try {
-    const response = await fetch(`http://localhost:5000/api/deleteblog`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: formdata
-    });
-
-    if (response.ok) {
-      alert("SubCategory deleted");
-
-      // Update state dynamically instead of reloading
-      const newItems = items.map(category => {
-        return {
-          ...category,
-          subcategories: category.subcategories.filter(subcategory => subcategory._id !== id)
-        };
+  const DeleteSubcategory = async (categoryId, subcategoryId) => {
+    const formdata = JSON.stringify({ id: categoryId, subcategoryid: subcategoryId });
+    try {
+      const response = await fetch(`http://localhost:5000/api/deletesubcategory`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: formdata
       });
-      setitems(newItems);
-    } else {
-      alert("Error");
+
+      if (response.ok) {
+        alert("Subcategory deleted");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        alert("Error");
+      }
+    } catch (err) {
+      console.log(err);
     }
-  } catch (err) {
-    console.log(err);
-    alert("Something went wrong");
-  }
-};
+  };
+
+
+
 
   useEffect(() => {
     fetch('http://localhost:5000/viewcategories') // Make sure this matches your backend API route
@@ -75,65 +42,66 @@ const Deletecategory = async (id) => {
   }, []);
   
 
-  return (
-    <div>
-      <h2 className='text-center'>View subcategories</h2>
-      <table className="table table-dark">
-        <tbody>
-          <tr className="table-active">
-            <th>Category Name</th>
-            <th>Subcategory Name</th>
-            <th>Image</th>
-            <th>Content</th>
-            <th>Created at</th>
-            <th>Action</th>
-            <th>Update</th>
-          </tr>
-          {
-            items.map(category => 
-                category.subcategories.map(subcategory=>(
-                
-              <tr key={subcategory._id}>
-                <td>{category.name}</td>
-                <td>{subcategory.subcategoryname}</td>
-                
-                <td>
-                    <img src={subcategory.subcategoryimage} alt={subcategory.subcategoryname} style={{ maxWidth: '100px', maxHeight: '100px' }} /></td>
-               
-                <td>{subcategory.content}</td>
-
-                    <td>{new Date(subcategory.createdAt).toLocaleDateString()}</td>
-                <td>
-                  <button onClick={() => Deletecategory(subcategory._id)}>❌</button>
-                </td>
-                <td>
-                <Link to ={`/admin/Updatesubcategory/${category._id}/${subcategory._id}`}>
-               <button className='btn btn-warning '><i class="fa fa-edit"></i>
-                </button></Link>
-                </td>
+  
+    return (
+      <div className="container mt-4">
+        <h1 className="text-center mb-4">View SubCategories</h1>
+        <div className="table-responsive">
+          <table className="table table-striped table-hover table-bordered text-center">
+            <thead className="table-dark">
+              <tr>
+                <th>Category Name</th>
+                <th>Subcategory Name</th>
+                <th>Image</th>
+                <th>Content</th>
+                <th>Created At</th>
+                <th>Action</th>
+                <th>Update</th>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
-
-      {/* Add Blog Button */}
-      <button 
-        onClick={() => navigate('/admin/subcategories')} 
-        style={{
-          marginTop: '20px',
-          padding: '10px 20px',
-          backgroundColor: '#28a745',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer'
-        }}
-      >
-        Add SubCategory
-      </button>
-    </div>
-  );
-}
-
+            </thead>
+            <tbody>
+              {items.map(category =>
+                category.subcategories.map(subcategory => (
+                  <tr key={subcategory._id}>
+                    <td>{category.name}</td>
+                    <td>{subcategory.subcategoryname}</td>
+                    <td>
+                      <img
+                        src={subcategory.subcategoryimage}
+                        alt={subcategory.subcategoryname}
+                        className="img-fluid rounded"
+                        style={{ height: "50px", width: "50px", objectFit: "cover" }}
+                      />
+                    </td>
+                    <td>{subcategory.content}</td>
+                    <td>{new Date(subcategory.createdAt).toLocaleDateString()}</td>
+                    <td>
+                      <button
+                        className="btn btn-danger btn-sm"
+                        onClick={() => DeleteSubcategory(category._id, subcategory._id)}
+                      >
+                        <i className="bi bi-trash"></i>
+                      </button>
+                    </td>
+                    <td>
+                      <Link to={`/admin/Updatesubcategory/${category._id}/${subcategory._id}`}>
+                        <button className="btn btn-warning btn-sm">
+                          <i className="fa-solid fa-pen-to-square"></i>
+                        </button>
+                      </Link>
+                    </td>
+                  </tr>
+                ))
+              )}
+            </tbody>
+          </table>
+        </div>
+        <div className="text-center mt-3">
+          <Link to="/admin/subcategories" className="btn btn-primary">
+            <i className="bi bi-plus-circle"></i> Add SubCategory
+          </Link>
+        </div>
+      </div>
+    );
+  };
 export default Viewsubcategories;

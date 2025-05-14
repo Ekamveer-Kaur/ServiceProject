@@ -88,19 +88,35 @@ const Profile = () => {
         }
     };
 
-    return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-5">
-            <div className="bg-white shadow-lg rounded-lg p-6 w-80 text-center">
-                <h2 className="text-xl font-bold text-gray-800 mb-4">Profile Picture</h2>
-                <img src={picurl} alt="Profile" className="rounded-full mx-auto border border-gray-300 shadow-md" style={{ width: "100px", height: "100px" }} />
-                <br />
-                <input type="file" onChange={handlePicture} className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-500 file:text-white hover:file:bg-blue-600 cursor-pointer" />
-                <button onClick={handleUpload} className={`mt-4 w-full text-white font-semibold py-2 rounded-lg shadow-md transition-all duration-200 ${isUploading ? "bg-gray-500 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}`} disabled={isUploading}>
-                    {isUploading ? "Uploading..." : "Upload Picture"}
-                </button>
+    
+        return (
+            <div className="d-flex justify-content-center align-items-center min-vh-100 bg-light p-5">
+                <div className="card shadow-sm p-4 rounded w-100 w-sm-75 w-md-50 w-lg-40">
+                    <h2 className="text-center text-primary mb-4">Profile Picture</h2>
+                    <div className="d-flex justify-content-center mb-4">
+                        <img 
+                            src={picurl} 
+                            alt="Profile" 
+                            className="rounded-circle border border-secondary shadow-sm" 
+                            style={{ width: "120px", height: "120px" }} 
+                        />
+                    </div>
+                    <input 
+                        type="file" 
+                        onChange={handlePicture} 
+                        className="form-control mb-3"
+                    />
+                    <button 
+                        onClick={handleUpload} 
+                        className={`btn btn-primary w-100 ${isUploading ? "disabled" : ""}`} 
+                        disabled={isUploading}
+                    >
+                        {isUploading ? "Uploading..." : "Upload Picture"}
+                    </button>
+                </div>
             </div>
-        </div>
-    );
-};
+        );
+    };
+    
 
 export default Profile;

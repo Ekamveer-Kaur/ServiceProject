@@ -36,6 +36,7 @@ const Blog = mongoose.model('blog', new mongoose.Schema({
   content: { type: String, required: true },
   createdat: { type: Date, default: Date.now },
 }));
+// module.exports= Blog;
 
 // Add to Cart Schema
 const AddToCart = mongoose.model('cart', new mongoose.Schema({
@@ -72,6 +73,138 @@ const CategoryModel = mongoose.model('category', new mongoose.Schema({
     },
   ],
 },{timestamps: true}));
+
+
+// app.get("/api/search", async (req, res) => {
+//   try {
+//     const { query } = req.query;  // User se search query lene ke liye
+
+//     if (!query) {
+//       return res.status(400).json({ message: "Search query is required" });
+//     }
+
+//     // Category, Subcategory, aur Small Subcategory ko filter karne ke liye query search
+//     const categories = await CategoryModel.find({
+//       name: { $regex: query, $options: 'i' }  // Case-insensitive search
+//     });
+
+//     const filteredSubcategories = await CategoryModel.aggregate([
+//       { $unwind: "$subcategories" },
+//       { $match: { "subcategories.name": { $regex: query, $options: 'i' } } }
+//     ]);
+
+//     const filteredSmallSubcategories = await CategoryModel.aggregate([
+//       { $unwind: "$subcategories" },
+//       { $unwind: "$subcategories.subsmallcategories" },
+//       { $match: { "subcategories.subsmallcategories.name": { $regex: query, $options: 'i' } } }
+//     ]);
+
+//     // Combine all results and send them back in a response
+//     const results = {
+//       categories,
+//       subcategories: filteredSubcategories.map(sub => sub.subcategories),
+//       smallSubcategories: filteredSmallSubcategories.map(sub => sub.subcategories.subsmallcategories)
+//     };
+
+//     res.status(200).json(results);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json({ message: "Error while searching", error: err.message });
+//   }
+// });
+
+
+//delete category
+app.post("/api/deletecategory", async (req, res) => {
+
+  try{
+    await CategoryModel.deleteOne({_id:req.body.id})
+    res.status(200).json({message:"ok"})
+  }
+  catch(err){
+    res.status(500).json({message:"error"})
+    console.log(err);
+  }
+})
+// delete sub category 
+app.post("/api/deletesubcategory", async (req, res) => {
+  try {
+    const { id, subcategoryid } = req.body;
+
+    if (!id || !subcategoryid) {
+      return res.status(400).json({ message: "Category ID and Sub-category ID are required" });
+    }
+
+    // Find the category by ID
+    const category = await CategoryModel.findById(id);
+
+    if (!category) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
+    // Remove the subcategory from the array of subcategories
+    category.subcategories = category.subcategories.filter(
+      (sub) => sub._id.toString() !== subcategoryid
+    );
+
+    await category.save(); // Save the updated category
+
+    res.status(200).json({ message: "Sub-category deleted successfully" });
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+// delete small sub category
+app.post("/api/deletesmallsubcategory", async (req, res) => {
+  try {
+    const { categoryid, subcategoryid, smallsubcategoryid } = req.body;
+
+    if (!categoryid || !subcategoryid || !smallsubcategoryid) {
+      return res.status(400).json({ message: "Category ID, Sub-category ID, Small-Sub-category ID are required" });
+    }
+
+    // ✅ कैटेगरी खोजें
+    const category = await CategoryModel.findById(categoryid);
+    if (!category) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
+    // ✅ सबकैटेगरी खोजें
+    const subcategory = category.subcategories.find(sub => sub._id.toString() === subcategoryid);
+    if (!subcategory) {
+      return res.status(404).json({ message: "Sub-category not found" });
+    }
+
+    // ✅ छोटे सबकैटेगरी को फ़िल्टर करके हटाएँ
+    subcategory.subsmallcategories = subcategory.subsmallcategories.filter(
+      smallsub => smallsub._id.toString() !== smallsubcategoryid
+    );
+
+    await category.save(); // ✅ अपडेट को सेव करें
+
+    res.status(200).json({ message: "Small sub-category deleted successfully" });
+  } catch (err) {
+    console.error("Error:", err);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+
+//dashboard pe blogs show krvane k liye 
+
+// GET total number of blogs
+
+app.get("/api/count-blogs", async (req, res) => {
+  try {
+    const countBlogs = await Blog.countDocuments();
+    res.json({ count: countBlogs }); // Change countBlogs to count
+  } catch (error) {
+    res.status(500).json({ message: "Error counting blogs", error });
+  }
+});
+
 
 //Add to cart
 app.post("/api/addtocart", async (req, res) => {

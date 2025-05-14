@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // ✅ useNavigate import kiya
 import { Link } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
 const Viewblogs = () => {
   const [items, setitems] = useState([]);
   const navigate = useNavigate(); // ✅ useNavigate ko define kiya
@@ -43,54 +44,66 @@ alert("error");
   
 
   return (
-    <div>
-      <h2 className='text-center'>View Blogs</h2>
-      <table className="table table-dark">
-        <tbody>
-          <tr className="table-active">
-            <th>Image</th>
-            <th>Title</th>
-            <th>Comment Content</th>
-            <th>Action</th>
-            <th>Update</th>
-          </tr>
-          {
-            items.map(item => (
-              <tr key={item._id}>
-                <td><img src={item.photo} alt={item.title} style={{ maxWidth: '100px', maxHeight: '100px' }} /></td>
-                <td>{item.title}</td>
-                <td>{item.content}</td>
-                <td>
-                  <button onClick={() => Deleteblog(item._id)}>❌</button>
-                </td>
-                <td>
-               <Link to ={`/admin/Updateblog/${item._id}`}>
-               <button className='btn btn-warning '><i class="fa fa-edit"></i>
-                </button></Link>
-                </td>
-              </tr>
-            ))
-          }
-        </tbody>
-      </table>
+    <div className="container mt-4">
+      <h1 className="text-center mb-4">View Blogs</h1>
+      <div className="table-responsive">
+        <table className="table table-striped table-hover table-bordered text-center">
+          <thead className="table-dark">
+            <tr>
+              <th>Image</th>
+              <th>Title</th>
+              <th>Content</th>
+              <th>Delete</th>
+              <th>Update</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              items.map(item => (
+                <tr key={item._id}>
+                  <td>
+                    <img
+                      src={item.photo || "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"}
+                      alt={item.title}
+                      className="img-fluid rounded"
+                      style={{ height: "50px", width: "50px", objectFit: "cover" }}
+                    />
+                  </td>
+                  <td>{item.title}</td>
+                  <td>{item.content}</td>
+                  <td>
+                    <button
+                      className="btn btn-danger btn-sm"
+                      onClick={() => Deleteblog(item._id)}
+                    >
+                      ❌
+                    </button>
+                  </td>
+                  <td>
+                    <Link to={`/admin/Updateblog/${item._id}`}>
+                      <button className="btn btn-warning btn-sm">
+                        <i className="fa fa-edit"></i>
+                      </button>
+                    </Link>
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
 
       {/* Add Blog Button */}
-      <button 
-        onClick={() => navigate('/admin/blogs')} 
-        style={{
-          marginTop: '20px',
-          padding: '10px 20px',
-          backgroundColor: '#28a745',
-          color: 'white',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer'
-        }}
-      >
-        Add Blog
-      </button>
+      <div className="text-center mt-3">
+        <button
+          onClick={() => navigate('/admin/blogs')}
+          className="btn btn-success"
+        >
+          Add Blog
+        </button>
+      </div>
     </div>
   );
-}
+};
 
 export default Viewblogs;

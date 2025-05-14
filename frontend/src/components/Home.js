@@ -1,8 +1,9 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import ContactUs from "./ContactUs";
 import Services from "./Services";
-import pic1 from "../Images/right.webp"; // ✅ Correct Path
+import pic1 from "../Images/right.webp";
 import pic2 from "../Images/first.webp";
 import pic3 from "../Images/second.webp";
 import pic4 from "../Images/third.webp";
@@ -14,213 +15,106 @@ import pic9 from "../Images/two.png";
 import pic10 from "../Images/three.jpeg";
 import pic11 from "../Images/four.webp";
 import pic12 from "../Images/five.jpg";
+import Slider from "./Slider";
+import Testimonial from "./Testimonials";
+import AboutUs from "./AboutUs";
 const Home = () => {
-
   return (
-    <div className="container mt-5">
-      <div className="row align-items-center">
-        {/* Left Column - Services Box */}
-        <div className="col-lg-6 d-flex flex-column align-items-center">
-          <h2 className="me-5 mb-5 text-center">Home Services at Your Doorstep</h2>
-
+    <div className="container my-5">
+      {/* Hero Section */}
+      <div className="row align-items-center bg-light p-4 rounded shadow-lg">
+        {/* Left Column */}
+        <div className="col-lg-6 mb-4">
+          <h2 className="text-primary fw-bold display-6 text-center mb-4">
+            Home Services at Your Doorstep
+          </h2>
           <div
-            className="p-4 rounded shadow py-5 me-5"
-            style={{
-              background: "#f8f9fa",
-              maxWidth: "500px",
-              width: "100%",
-            }}
+            className="p-4 rounded-4 shadow-sm bg-white"
+            style={{ maxWidth: "520px", margin: "auto" }}
           >
-            <h5 className="mb-3">What are you looking for?</h5>
-            {/* <div className="row g-3">
-  {[
-    { img: "https://cdn-icons-png.flaticon.com/512/2867/2867281.png", text: "Women's Salon & Spa" },
-    { img: "https://cdn-icons-png.flaticon.com/512/2867/2867316.png", text: "Men's Salon & Massage" },
-    { img: "https://cdn-icons-png.flaticon.com/512/2867/2867294.png", text: "AC & Appliance Repair" },
-    { img: "https://cdn-icons-png.flaticon.com/512/2867/2867311.png", text: "Cleaning" },
-    { img: "https://cdn-icons-png.flaticon.com/512/2867/2867302.png", text: "Electrician & Plumber " },
-    { img: "https://cdn-icons-png.flaticon.com/512/2867/2867324.png", text: "Water Purifier" },
-    { img: "https://cdn-icons-png.flaticon.com/512/2867/2867305.png", text: "Smart Locks" },
-    { img: "https://cdn-icons-png.flaticon.com/512/2867/2867318.png", text: "Painting & Renovation" },
-    { img: "https://cdn-icons-png.flaticon.com/512/2867/2867320.png", text: "Pest Control" },
-  ].map((service, index) => (
-    <div key={index} className="col-4 text-center">
-      <div
-        className="p-3 bg-white rounded shadow-sm"
-        style={{ cursor: "pointer" }} // Cursor pointer for better UX
-         
-      >
-        <img src={service.img} alt={service.text} width="40" height="40" />
-        <p className="mt-2 mb-0" style={{ fontSize: "0.85rem" }}>{service.text}</p>
-      </div>
-    </div>
-  ))} */}
-{/* </div> */}
-<div>
-<Services/>
-</div>
-</div>
-</div>
+            <h5 className="text-dark mb-4">What are you looking for?</h5>
+            <Services />
+          </div>
+        </div>
 
-        {/* Right Column - Image */}
+        {/* Right Column */}
         <div className="col-lg-6">
           <img
             src={pic1}
             alt="Home Services"
-            className="img-fluid rounded"
-            style={{ width: "100%", maxHeight: "600px", objectFit: "cover" }}
+            className="img-fluid rounded-4 shadow"
+            style={{ objectFit: "cover", height: "100%", maxHeight: "500px" }}
           />
         </div>
       </div>
 
-      {/* Rating & Customer Section */}
-      <div className="d-flex justify-content-start gap-5 mt-5 ms-5">
-        <div className="text-center">
-          <h3>⭐ 4.8</h3>
-          <p className="mb-0 text-muted">Service Rating</p>
+      {/* Stats Section */}
+      <div className="d-flex justify-content-center gap-5 text-center mt-5">
+        <div>
+          <h3 className="text-warning fw-bold">⭐ 4.8</h3>
+          <p className="text-muted">Service Rating</p>
         </div>
-        <div className="text-center">
-          <h3>👥 12M+</h3> 
-          <p className="mb-0 text-muted">Customers Globally</p>
+        <div>
+          <h3 className="text-success fw-bold">👥 12M+</h3>
+          <p className="text-muted">Customers Globally</p>
         </div>
       </div>
 
-      {/* Bootstrap Carousel */}
-      <div id="carouselExample" className="carousel slide" data-bs-ride="carousel" data-bs-wrap="false">
-
-        <div className="carousel-inner mt-5 py-5">
-          {/* First Slide */}
+      {/* Carousel Section */}
+      <div id="carouselExample" className="carousel slide mt-5" data-bs-ride="carousel">
+        <div className="carousel-inner">
           <div className="carousel-item active">
-            <div className="d-flex justify-content-center gap-3">
-              <div className="col-4">
-                <img src={pic2} className="img-fluid rounded" alt="Slide 1" />
-              </div>
-              <div className="col-4">
-                <img src={pic3} className="img-fluid rounded" alt="Slide 2" />
-              </div>
-              <div className="col-4">
-                <img src={pic4} className="img-fluid rounded" alt="Slide 3" />
-              </div>
+            <div className="d-flex justify-content-center gap-4">
+              {[pic2, pic3, pic4].map((pic, i) => (
+                <img key={i} src={pic} alt={`Slide ${i}`} className="img-fluid rounded-3 shadow" style={{ width: "30%", objectFit: "cover" }} />
+              ))}
             </div>
           </div>
-
-          {/* Second Slide */}
           <div className="carousel-item">
-            <div className="d-flex justify-content-center gap-3">
-              <div className="col-4">
-                <img src={pic5} className="img-fluid rounded" alt="Slide 4" />
-              </div>
-              <div className="col-4">
-                <img src={pic6} className="img-fluid rounded" alt="Slide 5" />
-              </div>
-              <div className="col-4">
-                <img src={pic7} className="img-fluid rounded" alt="Slide 6" />
-              </div>
+            <div className="d-flex justify-content-center gap-4">
+              {[pic5, pic6, pic7].map((pic, i) => (
+                <img key={i} src={pic} alt={`Slide ${i + 3}`} className="img-fluid rounded-3 shadow" style={{ width: "30%", objectFit: "cover" }} />
+              ))}
             </div>
           </div>
         </div>
-
-        {/* Navigation Buttons */}
-        <button
-          className="carousel-control-prev rounded-circle p-3"
-          style={{
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            top: "50%",
-            left: "-50px",
-            transform: "translateY(-50%)",
-            width: "50px",
-            height: "50px",
-          }}
-          type="button"
-          data-bs-target="#carouselExample"
-          data-bs-slide="prev"
-        >
-          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <button className="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span className="carousel-control-prev-icon"></span>
         </button>
-
-        <button
-          className="carousel-control-next rounded-circle p-3"
-          style={{
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
-            top: "50%",
-            right: "-50px",
-            transform: "translateY(-50%)",
-            width: "50px",
-            height: "50px",
-          }}
-          type="button"
-          data-bs-target="#carouselExample"
-          data-bs-slide="next"
-        >
-          <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <button className="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span className="carousel-control-next-icon"></span>
         </button>
       </div>
-      <div className="container mt-5">
-  <h2 className="mb-4">New and Noteworthy</h2>
-  <div id="carouselExample" className="carousel slide" data-bs-ride="carousel" data-bs-wrap="false">
-    <div className="carousel-inner mt-5 py-5">
-      {/* First Slide */}
-      <div className="carousel-item active">
-        <div className="d-flex justify-content-center gap-3">
-          {/* Create a col for each image to be in a single row */}
-          <div className="col-2 me-2">
-            <img src={pic8} className="img-fluid rounded" alt="Slide 1" style={{ height: "250px", objectFit: "cover" }} />
-            <p className="fw-bold mt-3">Insta Maids</p>
-          </div>
-          <div className="col-2  me-2">
-            <img src={pic9} className="img-fluid rounded" alt="Slide 2" style={{ height: "250px", objectFit: "cover" }} />
-            <p className="fw-bold mt-3">Wall Panels</p>
-          </div>
-          <div className="col-2  me-2">
-            <img src={pic10} className="img-fluid rounded" alt="Slide 3" style={{ height: "250px", objectFit: "cover" }} />
-            <p className="fw-bold mt-3">Native Water Purifier</p>
-          </div>
-          <div className="col-2  me-2">
-            <img src={pic11} className="img-fluid rounded" alt="Slide 4" style={{ height: "250px", objectFit: "cover" }} />
-            <p className="fw-bold mt-3">Native Smart Locks</p>
-          </div>
-          <div className="col-2  me-2">
-            <img src={pic12} className="img-fluid rounded" alt="Slide 5" style={{ height: "250px", objectFit: "cover" }} />
-            <p className="fw-bold mt-3">Kitchen Cleaning</p>
-          </div>
+
+      {/* New and Noteworthy */}
+      <div className="mt-5">
+        <h2 className="text-center mb-4 text-decoration-underline">New and Noteworthy</h2>
+        <div className="d-flex justify-content-center flex-wrap gap-4">
+          {[{ img: pic8, text: "Insta Maids" }, { img: pic9, text: "Wall Panels" }, { img: pic10, text: "Native Water Purifier" }, { img: pic11, text: "Native Smart Locks" }, { img: pic12, text: "Kitchen Cleaning" }].map((item, idx) => (
+            <div key={idx} className="text-center" style={{ width: "160px" }}>
+              <img src={item.img} className="img-fluid rounded shadow-sm" alt={item.text} style={{ height: "160px", objectFit: "cover" }} />
+              <p className="fw-semibold mt-2">{item.text}</p>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
-  </div> 
-</div>
-<div className="container mt-5">
-  <h2 className="mb-4">Most Booked Services</h2>
-  <div id="carouselExample" className="carousel slide" data-bs-ride="carousel" data-bs-wrap="false">
-    <div className="carousel-inner mt-5 py-5">
-      {/* First Slide */}
-      <div className="carousel-item active">
-        <div className="d-flex justify-content-center gap-3">
-          {/* Create a col for each image to be in a single row */}
-          <div className="col-2 me-2">
-            <img src={pic8} className="img-fluid rounded" alt="Slide 1" style={{ height: "250px", objectFit: "cover" }} />
-            <p className="fw-bold mt-3">Insta Maids</p>
-          </div>
-          <div className="col-2  me-2">
-            <img src={pic9} className="img-fluid rounded" alt="Slide 2" style={{ height: "250px", objectFit: "cover" }} />
-            <p className="fw-bold mt-3">Wall Panels</p>
-          </div>
-          <div className="col-2  me-2">
-            <img src={pic10} className="img-fluid rounded" alt="Slide 3" style={{ height: "250px", objectFit: "cover" }} />
-            <p className="fw-bold mt-3">Native Water Purifier</p>
-          </div>
-          <div className="col-2  me-2">
-            <img src={pic11} className="img-fluid rounded" alt="Slide 4" style={{ height: "250px", objectFit: "cover" }} />
-            <p className="fw-bold mt-3">Native Smart Locks</p>
-          </div>
-          <div className="col-2  me-2">
-            <img src={pic12} className="img-fluid rounded" alt="Slide 5" style={{ height: "250px", objectFit: "cover" }} />
-            <p className="fw-bold mt-3">Kitchen Cleaning</p>
-          </div>
+
+      {/* Most Booked */}
+      <div className="mt-5">
+        <h2 className="text-center mb-4 text-decoration-underline">Most Booked Services</h2>
+        <div className="d-flex justify-content-center flex-wrap gap-4">
+          {[{ img: pic8, text: "Insta Maids" }, { img: pic9, text: "Wall Panels" }, { img: pic10, text: "Native Water Purifier" }, { img: pic11, text: "Native Smart Locks" }, { img: pic12, text: "Kitchen Cleaning" }].map((item, idx) => (
+            <div key={idx} className="text-center" style={{ width: "160px" }}>
+              <img src={item.img} className="img-fluid rounded shadow-sm" alt={item.text} style={{ height: "160px", objectFit: "cover" }} />
+              <p className="fw-semibold mt-2">{item.text}</p>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
-  </div> 
-  </div>
+<Slider/>
+<AboutUs/>
+      <ContactUs />
+      <Testimonial/>
     </div>
   );
 };
